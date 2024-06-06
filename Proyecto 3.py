@@ -1,3 +1,4 @@
+
 def instrucciones():
     while True:
         print("Instrucciones del Juego")
@@ -11,14 +12,19 @@ def instrucciones():
         
         if opcion == '1':
             mostrar_informacion("Aquí va el objetivo del juego...")
+            
         elif opcion == '2':
             mostrar_informacion("Aquí van los controles del juego...")
+            
         elif opcion == '3':
             mostrar_informacion("Aquí van las reglas del juego...")
+            
         elif opcion == '4':
             mostrar_informacion("Aquí van las estrategias del juego...")
+            
         elif opcion == '5':
             break
+        
         else:
             print("Opción no válida, por favor intenta de nuevo.")
 #------------------------------------------------------------------------ 
@@ -27,26 +33,36 @@ def menu_principal():
         print("Menú Principal")
         print("1. Jugar")
         print("2. Instrucciones del Juego")
-        print("3. Información de Costa Rica")
-        print("4. Información los indígenas")
-        print("5. Referencias")
-        print("6. Salir")
+        print("3. Información sobre SolarPunk")
+        print("4. Información sobre pueblos originarios")
+        print("5. Información sobre el conflicto en Cabaga, Costa Rica")
+        print("6. Referencias")
+        print("7. Salir")
         
         opcion = input("Selecciona una opción: ")
         
         if opcion == '1':
             return jugar()
+        
         elif opcion == '2':
             instrucciones()
+            
         elif opcion == '3':
-            mostrar_informacion("Aquí va la información de Costa Rica...")
+            mostrar_informacion("Aqui va la informacion del Solarpunk")
+            
         elif opcion == '4':
-            mostrar_informacion("Aquí va la información sobre los indígenas...")
+            mostrar_informacion("Aquí va la información sobre los pueblos originarios")
+            
         elif opcion == '5':
-            mostrar_informacion("Aquí van las referencias...")
+            mostrar_informacion("Aquí van la Información sobre el conflicto en Cabaga")
+            
         elif opcion == '6':
+            mostrar_informacion("Aquí van las referencias...")
+            
+        elif opcion == '7':
             print("Saliendo del programa...")
             break
+        
         else:
             print("Opción no válida, por favor intenta de nuevo.")
 #------------------------------------------------------------------------            
