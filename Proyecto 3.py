@@ -46,7 +46,7 @@ def menu_principal():
             return jugar()
         
         elif opcion == '2':
-            mostrar_informacion("""""")
+            intrucciones()
             
         elif opcion == '3':
             mostrar_informacion("""
