@@ -36,7 +36,7 @@ def menu_principal():
         print("2. Instrucciones del Juego")
         print("3. Información sobre SolarPunk")
         print("4. Información sobre Pueblos Originarios")
-        print("5. Información sobre el conflicto en Cabaga, Costa Rica")
+        print("5. Información sobre el conflicto en Cabagra, Costa Rica")
         print("6. Referencias")
         print("7. Salir")
         
@@ -46,7 +46,7 @@ def menu_principal():
             return jugar()
         
         elif opcion == '2':
-            intrucciones()
+            instrucciones()
             
         elif opcion == '3':
             mostrar_informacion("""
@@ -63,7 +63,7 @@ y económico revolucionario, que reconoce la necesidad de combatir los problemas
 para crear un futuro positivo para todos los seres vivos (Kroon, 2019). A pesar de las críticas al enfoque tecnoutópico, 
 las propuestas solarpunk combinan la cooperación entre organismos animales, vegetales y ecosistémicos, respaldadas por teorías actuales 
 dentro de las humanidades ambientales y los estudios de la energía, ofreciendo una visión de esperanza y sostenibilidad.
-            """)   
+            """,opcion)   
             
         elif opcion == '4':
             mostrar_informacion("""
@@ -79,14 +79,30 @@ y un fuerte compromiso con la preservación de sus características culturales y
 cambios en su organización social debido a factores económicos, generacionales y ambientales, desafiando aún más los estereotipos prevalentes.
 Este contexto subraya la necesidad de una comprensión más matizada y respetuosa de los pueblos originarios, reconociendo tanto su diversidad interna como
 su capacidad para adaptarse y evolucionar en un mundo moderno.
-            """)
+            """,opcion)
             
         elif opcion == '5':
-            mostrar_informacion("Aquí van la Información sobre el conflicto en Cabaga")
+            mostrar_informacion("""
+Los conflictos en los territorios indígenas de Costa Rica han escalado recientemente, extendiéndose de Salitre a Cabagra. Estos conflictos surgen
+principalmente por disputas de tierras entre las comunidades indígenas y no indígenas. En Salitre, la comunidad indígena ha enfrentado invasiones
+de tierras y violencia, mientras que en Cabagra, la tensión ha aumentado debido a la ocupación de tierras indígenas por parte de no indígenas.
+Las autoridades locales y nacionales han intervenido para intentar resolver estas disputas, pero las medidas tomadas no han sido suficientes para
+garantizar la seguridad y el respeto de los derechos territoriales indígenas. Las comunidades indígenas continúan luchando por la recuperación de
+sus tierras ancestrales, enfrentándose a amenazas y violencia en el proceso. Esta situación resalta la necesidad de una mayor protección y reconocimiento
+de los derechos territoriales de los pueblos indígenas, así como de un diálogo inclusivo y efectivo para resolver estos conflictos de manera pacífica y sostenible.
+            """,opcion)
             
         elif opcion == '6':
-            mostrar_informacion("Aquí van las referencias...")
-            
+            mostrar_informacion("""
+1)De, C., Ciencia, L. A., Solarpunk, F., & Rivero-Vadillo, A.Estudios humanísticos. Filología. University of Leon. 10.18002/ehf
+
+2)Naranjo Segura, J. C., & Bolaños-Alvarado, C. (2023). Los pueblos originarios de Costa Rica y la construcción de su imaginario desde la enseñanza de los Estudios Sociales: el caso maleku.
+Universidad de Costa Rica. 10.15517/h.v13i2.52966
+
+3)Delfino.cr. (2020, 10 de febrero). Conflictos en territorios indígenas salen de Salitre y llegan también a Cabagra. Delfino.cr. https://delfino.cr/2020/02/conflictos-en-territorios-indigenas-
+salen-de-salitre-y-llegan-tambien-a-cabagra
+             """,opcion)
+                     
         elif opcion == '7':
             print("Saliendo del programa...")
             break
@@ -99,14 +115,24 @@ def jugar():
 
 
     
-def mostrar_informacion(info):
+def mostrar_informacion(info,opcion):
     """
     funcion que mostrara el texto de manera correcta
     """
-    info_colocada = textwrap.fill(info, width=85)
-    print("")
-    print(info_colocada)
-    print("")
-    input("Presiona Enter para regresar al menú anterior...")
-
+    if opcion == '6':
+        
+        print("")
+        print(info)
+        print("")
+        input("Presiona Enter para regresar al menú anterior...")
+        
+        
+    else:
+        
+        info_colocada = textwrap.fill(info, width=85)
+        print("")
+        print(info_colocada)
+        print("")
+        input("Presiona Enter para regresar al menú anterior...")
+        
 menu_principal()
