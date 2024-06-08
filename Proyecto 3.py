@@ -109,12 +109,8 @@ salen-de-salitre-y-llegan-tambien-a-cabagra
         
         else:
             print("Opción no válida, por favor intenta de nuevo.")
-#------------------------------------------------------------------------            
-def jugar():
-    print("Iniciando el juego...")
-
-
-    
+#-------------------------------------------------------
+   
 def mostrar_informacion(info,opcion):
     """
     funcion que mostrara el texto de manera correcta
@@ -134,5 +130,79 @@ def mostrar_informacion(info,opcion):
         print(info_colocada)
         print("")
         input("Presiona Enter para regresar al menú anterior...")
+#-------------------------------------------------------
+    
+def numero_entero(cadena):
+    """funcion que revisa si un numero es entero o es una letra o un simbolo
+    E: texto del mensaje
+    S: true o false
+    """
+    if cadena == "":
+        return True
+    else:
+        primer_digito = cadena[0]
         
+        if primer_digito == "0" or \
+        primer_digito == "1" or \
+        primer_digito == "2" or \
+        primer_digito == "3" or \
+        primer_digito == "4" or \
+        primer_digito == "5" or \
+        primer_digito == "6" or \
+        primer_digito == "7" or \
+        primer_digito == "8" or \
+        primer_digito == "9"or \
+        primer_digito == "10001":
+            return numero_entero(cadena[1:])
+        
+        else:
+            return False
+
+#-------------------------------------------------------
+def obtener_entero(mensaje):
+    """
+    funcion que valida si el dato puede llegar a ser un entero o no
+    E: mensaje
+    S: valor que pidio cambiado a int
+    """
+    valor = input(mensaje)
+    if valor =="" or valor == " ":
+        print ("Error, debes de eligir algun número no letras ni simbolos")
+        return obtener_entero(mensaje)
+    elif numero_entero(valor)==False:
+        print ("Error, debes de eligir algun número no letras ni simbolos")
+        return obtener_entero(mensaje)
+    
+    else:
+        return int(valor)
+#-------------------------------------------------------    
+def solicitar_dimensiones():
+    """
+    funcion que inicia el juego y pedira los datos para crear las filas y columnas del tablero
+    """
+
+    filas=obtener_entero("Ingrese el numero de filas a colocar en el tablero, el minimo es 3 y maximo 9: ")
+    columnas=obtener_entero("Ingrese el numero de columnas a colocar en el tablero, minimo es 3 y maximo 9: ")
+
+
+    if 3 <= filas <= 9 and 3 <= columnas <= 9:
+        return filas, columnas
+
+    
+    else:
+        print("Por favor, ingrese valores dentro del rango permitido (3-9).")
+        return solicitar_dimensiones()
+    
+#------------------------------------------------------- 
+def crear_matriz(filas, columnas):
+    return [["⬜"for _ in range(columnas)] for _ in range(filas)]
+
+#------------------------------------------------------- 
+def jugar():
+    filas, columnas = solicitar_dimensiones()
+    matriz = crear_matriz(filas, columnas)
+    for fila in matriz:
+        print(fila)
+    return matriz 
+
 menu_principal()
