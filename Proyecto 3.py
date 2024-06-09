@@ -4,24 +4,59 @@ def instrucciones():
     while True:
         print("Instrucciones del Juego")
         print("1. Objetivo del Juego")
-        print("2. Controles")
+        print("2. Descripción del Tablero")
         print("3. Reglas del Juego")
-        print("4. Estrategias")
+        print("4. Consejos para Jugar")
         print("5. Volver al Menú Principal")
         
         opcion = input("Selecciona una opción: ")
         
         if opcion == '1':
-            mostrar_informacion("Aquí va el objetivo del juego...")
+            mostrar_informacion("""
+El objetivo principal del juego es simular la lucha de las comunidades recuperadoras
+en su intento por mantener la sostenibilidad de su entorno. Los jugadores deben
+gestionar recursos, mejorar sus comunidades y defenderse de ataques para asegurar
+la supervivencia y el bienestar de su población.
+            """,opcion)
             
         elif opcion == '2':
-            mostrar_informacion("Aquí van los controles del juego...")
+            mostrar_informacion("""
+Descripción del Tablero:
+El tablero representa el área de la comunidad, dividido en casillas que corresponden
+a diferentes partes del territorio. Cada casilla puede contener recursos, infraestructuras
+o elementos que los jugadores pueden utilizar para desarrollar su comunidad.
+El diseño del tablero permite a los jugadores visualizar y planificar sus movimientos
+estratégicos de manera efectiva.
+            """,opcion)
             
         elif opcion == '3':
-            mostrar_informacion("Aquí van las reglas del juego...")
+            opcion='z'
+            mostrar_informacion("""
+Reglas del Juego:
+1. Cada jugador comienza con un conjunto de recursos básicos.
+2. El tablero está dividido en casillas que representan diferentes áreas de la comunidad.
+3. Los jugadores deben asignar tareas a sus habitantes para recolectar recursos,
+mejorar infraestructuras y defender la comunidad.
+4. Los turnos se alternan entre los jugadores, y cada turno consiste en un número
+limitado de acciones.
+5. Los ataques de otras comunidades o desastres naturales pueden ocurrir
+aleatoriamente, y los jugadores deben estar preparados para responder.
+            """,opcion)
             
         elif opcion == '4':
-            mostrar_informacion("Aquí van las estrategias del juego...")
+            opcion='z'
+            mostrar_informacion("""
+ Consejos para Jugar:
+    - Prioriza la recolección de recursos esenciales al inicio del juego para asegurar
+      la supervivencia.
+    - Mejora las infraestructuras clave que aumentan la eficiencia de tu comunidad.
+    - Distribuye a tus habitantes de manera equilibrada para mantener un crecimiento
+      sostenible.
+    - Mantente alerta a las señales de posibles ataques y fortalece tus defensas
+      cuando sea necesario.
+    - Colabora con otras comunidades cuando sea posible para enfrentar amenazas comunes.
+            """,opcion)
+            
             
         elif opcion == '5':
             break
@@ -93,6 +128,7 @@ de los derechos territoriales de los pueblos indígenas, así como de un diálog
             """,opcion)
             
         elif opcion == '6':
+            opcion='z'
             mostrar_informacion("""
 1)De, C., Ciencia, L. A., Solarpunk, F., & Rivero-Vadillo, A.Estudios humanísticos. Filología. University of Leon. 10.18002/ehf
 
@@ -115,7 +151,7 @@ def mostrar_informacion(info,opcion):
     """
     funcion que mostrara el texto de manera correcta
     """
-    if opcion == '6':
+    if opcion == 'z':
         
         print("")
         print(info)
