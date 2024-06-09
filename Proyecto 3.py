@@ -1,4 +1,6 @@
 import textwrap
+from random import randrange as aleatorio
+from art import *
 
 def instrucciones():
     while True:
@@ -234,11 +236,461 @@ def crear_matriz(filas, columnas):
     return [["⬜"for _ in range(columnas)] for _ in range(filas)]
 
 #------------------------------------------------------- 
+def crear_matriz(filas, columnas):
+    """
+    Función que crea la matriz
+    E: Las dilas y columnas elegidas por el jugador
+    S: La matriz
+    R: Solo acepta esas filas y columnas
+    """
+    return [["_"for _ in range(columnas)] for _ in range(filas)]
+
+#------------------------------------------------------- 
 def jugar():
+    """
+    Función que hace la matriz
+    E: Nada
+    S: La matriz printeada
+    R: Nada
+    """
+    print(text2art("Bienvenido jugador"))
     filas, columnas = solicitar_dimensiones()
     matriz = crear_matriz(filas, columnas)
+    return mostrar_matriz(matriz)
+
+#------------------------------------------------------- 
+def mostrar_matriz(matriz):
+    """
+    Función que printea la matriz
+    E: La matriz de juego
+    S: La matriz printeada
+    R: Solo acepta esa matriz
+    """
     for fila in matriz:
         print(fila)
-    return matriz 
+    return inicio_juego(matriz)
 
+#-------------------------------------------------------
+def mostrar_matriz_juego(matriz):
+    """
+    Función que printea la matriz
+    E: La matriz de juego
+    S: La matriz printeada
+    R: Solo acepta esa matriz
+    """
+    for fila in matriz:
+        print(fila)
+    return " "
+
+#------------------------------------------------------- 
+def turno_jugador(matriz):
+
+    """
+    Función que hace los turnos de los jugadores
+    E:Nada
+    S: El turno del jugador
+    R: Ninguna
+    """
+    print(" ")
+    turno = input("Escoja entre P (Proyecto), I (Iniciativa) o C (Cultura): ")
+    print(f"Ha escogido {turno}")
+    print(" ")
+    posición_fi = input(f"Escoja la fila que desea debe ser entre 0 y {len(matriz) - 1}: ")
+    posición_co = input(f"Escoja la columna que desea debe ser entre 0 y {len(matriz[0]) - 1}: ")
+    print(f"Ha escogido la la posición {posición_fi}, {posición_co}")
+
+    if revisar_turno(turno) != True:
+        print(" ")
+        print("Error, debe ser una de las opciones mencionadas, intente de nuevo")
+        return turno_jugador(matriz)
+    
+    elif revisar_fila(matriz, posición_fi) != True or revisar_columna(matriz, posición_co) != True:
+        print(" ")
+        print("Error, debe ingresar un número o un valor válido para la posición, intente de nuevo")
+        return turno_jugador(matriz)
+
+    else:
+        return juego(matriz, turno, int(posición_fi), int(posición_co))
+
+#------------------------------------------------------- 
+def revisar_turno(turno):
+    """
+    Función que revisa si el turno es válido
+    E: El turno del jugador
+    S: True si es válido o false en caso de que no
+    R: Solo acepta el turno
+    """
+    if type(turno) != str:
+        return False
+    
+    elif turno.upper() == "P" or turno.upper() == "I" or turno.upper() == "C":
+        return True
+    
+    else:
+        return False
+
+#------------------------------------------------------- 
+def revisar_fila(matriz, fila):
+    """
+    Función que revisa si la fila es permitida
+    E: La fila del jugador y la matriz de juego
+    S: True si está permitida, False en caso de que no
+    R:Solo acepta la fila ingresada por el jugador
+    """
+
+    if numero_entero(fila) != True:
+        return False
+    
+    elif fila == " " or fila == "":
+        return False
+    
+    else:
+        fila = int(fila)
+        if fila < 0 or fila >= len(matriz):
+            return False
+        
+        else:
+            return True
+        
+#------------------------------------------------------- 
+def revisar_columna(matriz, columna):
+    """
+    Función que revisa si la fila es permitida
+    E: La fila del jugador y la matriz de juego
+    S: True si está permitida, False en caso de que no
+    R:Solo acepta la fila ingresada por el jugador
+    """
+
+    if numero_entero(columna) != True:
+        return False
+    
+    elif columna == " " or columna == "":
+        return False
+    
+    else:
+        columna = int(columna)
+        if columna < 0 or columna >= len(matriz[0]):
+            return False
+        
+        else:
+            return True
+        
+#------------------------------------------------------- 
+def juego(matriz, turno, fila, columna):
+    """
+    Función que lleva acabo las acciones de la opción escogida por el juagdor
+    E:Las opciones escogidas por el jugador y la matriz  
+    S: La matriz con los cambios necesarios
+    R: Solo acepta lo antes mencionado
+    """
+    if type(turno) != str:
+        return "Error"
+
+    elif turno.upper() == "P":
+        matriz[fila][columna] = turno.upper()
+        return iniciativa(matriz, fila, columna)
+    
+    elif turno.upper() == "C":
+        matriz[fila][columna] = turno.upper()
+        return cultura(matriz, fila, columna)
+    
+    elif turno.upper() == "I":
+        matriz[fila][columna] = turno.upper()
+        return iniciativa(matriz, fila, columna)
+    
+    else:
+        return 
+
+#------------------------------------------------------- 
+def proyecto(matriz):
+    """
+    Función que revisa si el juego debe acabar, ver quién gana o no
+    E: La matriz de juego
+    S: Un mensaje de ganador o la matriz, seún qué pase
+    R: Solo acepta la matriz de juego
+    """
+    contador_1 = 0
+    contador_2 = 0
+    
+
+    while contador_2 < len(matriz[0]):
+
+        if matriz[0][contador_2] == "P":
+
+            contar = 1
+            while True:
+                
+
+                if matriz[contar][contador_2] == "P":
+                    contar += 1
+                    
+                    if contar == len(matriz):
+                        return ganar()
+                    
+                    else: 
+                        continue
+            
+                else: 
+                    
+                    break
+            contador_2 += 1
+        else: 
+            contador_2 += 1
+    
+    while contador_1 < len(matriz):
+
+        if matriz[contador_1][0] == "P":
+
+            contar = 1
+            while True:
+                
+
+                if matriz[contador_1][contar] == "P":
+                    contar += 1
+                    
+                    if contar == len(matriz[0]):
+                        return ganar()
+                    
+                    else: 
+                        continue
+            
+                else: 
+                    
+                    break
+            contador_1 += 1
+        else: 
+            contador_1 += 1
+    
+    return matriz
+
+#------------------------------------------------------- 
+def cultura(matriz, fila, columna):
+    """
+    Función que despliega las culturas
+    E: La matriz y la fila y columna que ingresó el jugador
+    S: La matriz de juego
+    R: Solo acepta lo antes dicho
+    """
+    contador_1 = 0
+    contador_2 = 0
+
+    while contador_2 < len(matriz[0]):
+
+        if matriz[fila][contador_2] == "P":
+            break
+
+        else: 
+            matriz[fila][contador_2] = "C"
+            contador_2 += 1
+
+    contador_2 = 0
+
+    while contador_2 > 0:
+        if matriz[fila][contador_2] == "P":
+            break
+
+        else: 
+            matriz[fila][contador_2] = "C"
+            contador_2 -= 1
+    
+    while contador_1 < len(matriz):
+        if matriz[contador_1][columna] == "P":
+            break
+
+        else:
+            matriz[contador_1][columna] = "C"
+            contador_1 += 1
+    
+    contador_1 = 0
+    
+    while contador_1 > 0:
+        if matriz[contador_1][columna] == "P":
+            break
+
+        else:
+            matriz[contador_1][columna] = "C"
+            contador_1 -= 1
+
+
+
+    return iniciativa(matriz, fila, columna)
+
+#------------------------------------------------------- 
+def iniciativa(matriz, fila, columna):
+    """
+    Función que revisa si hay iniciativas para convertir en proyectos
+    E: La matriz de juego
+    S: Un mensaje de ganador o la matriz, según qué pase
+    R: Solo acepta la matriz de juego
+    """
+    contador_1 = 0
+    contador_2 = 0
+    
+    for i in matriz:
+
+        for caracter in i:
+
+            if contador_1 == fila and contador_2 == columna:
+                contador_2 += 1
+                continue
+
+            else:
+
+                if caracter == "I":
+                    matriz[contador_1][contador_2] = "P"
+                    contador_2 += 1
+                    continue
+                else:
+                    contador_2 += 1
+                    continue
+        contador_2 = 0
+        contador_1 += 1
+
+    
+    return proyecto(matriz)
+
+#-------------------------------------------------------
+def ganar():
+    """
+    Función con el mensaje de ganar
+    """
+    return "Has ganado, felicidades"
+
+#-------------------------------------------------------
+def turno_máquina(matriz):
+    """
+    Función que hace el turno de la noche o la máquina
+    E: La matriz de juego
+    S: La matriz de la máquina o si el jugador perdió
+    R: Solo acepta la matriz de juego
+    """
+    numero = aleatorio(0, len(matriz))
+    print(" ")
+    print(f"Los terrenos usurpado serán {numero}")
+    print(" ")
+
+
+    while numero > 0:
+        number_1 = aleatorio(0, len(matriz))
+        number_2 = aleatorio(0, len(matriz[0]))
+
+
+        if matriz[number_1][number_2] == "P":
+            matriz[number_1][number_2] = "U"
+            numero -= 1
+        
+        elif matriz[number_1][number_2] == "I":
+            numero -= 1
+            continue
+
+        elif matriz[number_1][number_2] == "C":
+            matriz[number_1][number_2] = "_"
+            numero -= 1
+        
+        else:
+            matriz[number_1][number_2] = "U"
+            numero -= 1
+
+    return máquina(matriz)
+
+#-------------------------------------------------------
+def máquina(matriz):
+    """
+    Función que revisa si la máquina ha ganado
+    E: La matriz de juego
+    S: La matriz de juego o el mensaje de perder
+    R: Solo acepta la matriz
+    """
+    contador_1 = 0
+    contador_2 = 0
+
+    
+
+    while contador_2 < len(matriz[0]):
+
+        if matriz[0][contador_2] == "U":
+
+            contar = 1
+            while True:
+                
+
+                if matriz[contar][contador_2] == "U":
+                    contar += 1
+                    
+                    if contar == len(matriz):
+                        return perdido()
+                    
+                    else: 
+                        continue
+            
+                else: 
+                    
+                    break
+            contador_2 += 1
+        else: 
+            contador_2 += 1
+    
+    while contador_1 < len(matriz):
+
+        if matriz[contador_1][0] == "P":
+
+            contar = 1
+            while True:
+                
+
+                if matriz[contador_1][contar] == "U":
+                    contar += 1
+                    
+                    if contar == len(matriz[0]):
+                        return perdido()
+                    
+                    else: 
+                        continue
+            
+                else: 
+                    
+                    break
+            contador_1 += 1
+        else: 
+            contador_1 += 1
+    
+    return matriz
+#-------------------------------------------------------
+def perdido():
+    """
+    Función con el mensaje de perder
+    """
+    return "Has perdido, inténtalo de nuevo"
+
+#------------------------------------------------------- 
+def inicio_juego(matriz):
+    """
+    Función que inicia y lleva el juego acabo
+    E: La matriz de juego
+    S: El juego como tal
+    R: Solo acepta esa matriz
+    """
+    matriz_dia = turno_jugador(matriz)
+
+    if matriz_dia == "Has ganado, felicidades":
+        print(" ")
+        print(text2art("El juego ha terminado"))
+        print(text2art("Has ganado"))
+        return print(text2art("Felicidades"))
+
+    print(" ")
+    mostrar_matriz_juego(matriz_dia)
+    
+    matriz_noche = turno_máquina(matriz_dia)
+    
+    if matriz_noche == "Has perdido, inténtalo de nuevo":
+        print(" ")
+        print(text2art("El juego ha terminado"))
+        print(text2art("Has perdido"))
+        return print(text2art("Intentalo de nuevo"))
+    print(" ")
+    mostrar_matriz_juego(matriz_noche)
+
+    
+    return inicio_juego(matriz_noche)
 menu_principal()
